@@ -1,0 +1,165 @@
+" ==========================================================
+set scrolloff=10
+set number relativenumber
+set showmode
+set showcmd
+set smartcase
+set incsearch
+set hlsearch
+set functiontextobj
+set visualbell
+" Use system clipboard
+set clipboard+=unnamed   
+set multiple-cursors
+" add leader key
+let mapleader = " "
+
+
+"" Plugin Settings
+"" ========================================================
+
+"" multiple cursor configuration
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+set surround
+set highlightedyank
+set sneak
+set nerdtree
+set ideajoin
+
+"" Key mappings
+"" ========================================================
+
+" inoremap jk <Esc>
+
+" Tab navigation
+nnoremap <A-n> :tabnext<CR>
+nnoremap <A-p> :tabprev<CR>
+
+" Pane navigation
+" nnoremap <A-h> <C-w>h
+" nnoremap <A-l> <C-w>l
+" nnoremap <A-k> <C-w>k
+" nnoremap <A-j> <C-w>j
+
+" Jump between methods
+" nnoremap [[ <Action>(MethodUp)
+" nnoremap ]] <Action>(MethodDown)
+
+ Easy visual indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" Execute macro saved in 'q' register
+nnoremap qj @q
+
+" Popup navigation
+
+
+
+"" Leader commands
+"" ========================================================
+
+" Comment lines
+map <leader>c <action>(CommentByLineComment)
+
+" Jump around with easymotion
+map <leader>j <Plug>(easymotion-s)
+
+" Open NERDTree (use q to exit)
+map <leader>x :NERDTreeToggle<CR>
+
+" Folding
+map <leader>zc :action CollapseAllRegions<CR>
+map <leader>zo :action ExpandAllRegions<CR>
+
+" Window splits
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+" Display options
+map <leader>dd <action>(ToggleDistractionFreeMode)
+map <leader>dz <action>(ToggleZenMode)
+map <leader>df <action>(ToggleFullScreen)
+
+" Actions
+map <leader>am <action>(ShowIntentionActions)
+map <leader>as <action>(SearchEverywhere)
+
+"find everything  
+map <leader>ff <action>(GotoFile)
+map <leader>fr <action>(RecentFiles)
+map <leader>fc <action>(GotoClass) 
+map <leader>fl <action>(RecentLocations)
+map <leader>fs <action>(NewScratchFile)
+map <leader>fa <Action>(SearchEverywhere)
+
+
+" Close active tab
+map <leader>q <action>(CloseContent)
+
+" Refactoring
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+
+" Go to code
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>gt <Action>(GotoTest)
+
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+
+
+" Git windows
+map <leader>gc <Action>(CheckinProject)
+map <leader>gs <Action>(ActivateVersionControlToolWindow)
+map <leader>gb <Action>(Git.Branches)
+
+" Errors
+map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
+map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
+" close current tab
+map <leader>q <action>(CloseContent)
+
+map <leader>qa <action>(CloseAllEditors)
+
+nnoremap <leader>xf :NERDTreeFind<CR>
+nnoremap <leader>ct <Action>(ActiveateEditorComponent)
+nnoremap <leader>rp "_ddP
+
+
+nnoremap d "_d
+nnoremap D "_D
+nnoremap x "_x
+vnoremap d "_d
+
+nnoremap c "_c
+nnoremap C "_C
+nnoremap s "_s
+nnoremap S "_S
+
+" Don't let visual mode paste overwrite default register
+vnoremap p "_dP
+
+" control + alt + A => create new item
+
+
+" move up and down
+vmap <S-J> <Action>(MoveLineDown)
+vmap <S-K> <Action>(MoveLineUp)
+
+nnoremap <leader>n :action NewElement<CR>
