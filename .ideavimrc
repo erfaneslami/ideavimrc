@@ -1,3 +1,4 @@
+
 " ==========================================================
 set scrolloff=10
 set number relativenumber
@@ -163,3 +164,26 @@ vmap <S-J> <Action>(MoveLineDown)
 vmap <S-K> <Action>(MoveLineUp)
 
 nnoremap <leader>n :action NewElement<CR>
+
+
+" Resize sidebar (Project tool window)
+" Increase sidebar width
+nnoremap <leader>w+ :action ResizeToolWindowRight<CR>
+" Decrease sidebar width  
+nnoremap <leader>w- :action ResizeToolWindowLeft<CR>
+" Find Usages
+nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>fs :action FindUsagesInFile<CR>
+
+" Show usages popup (quick preview)
+nnoremap <leader>su :action ShowUsages<CR>
+
+" Highlight usages in file
+nnoremap <leader>hu :action HighlightUsagesInFile<CR>
+" Quick documentation and usages
+nnoremap K :action QuickJavaDoc<CR>
+nnoremap <leader>k :action QuickImplementations<CR>
+nnoremap <leader>K :action QuickTypeDefinition<CR>
+
+" Parameter info
+nnoremap <C-p> :action ParameterInfo<CR>
