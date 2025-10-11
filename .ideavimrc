@@ -130,9 +130,21 @@ map <leader>gc <Action>(CheckinProject)
 map <leader>gs <Action>(ActivateVersionControlToolWindow)
 map <leader>gb <Action>(Git.Branches)
 
-" Errors
-map <leader>en <Action>(ReSharperGotoNextErrorInSolution)
-map <leader>ep <Action>(ReSharperGotoPrevErrorInSolution)
+" Go to first error
+nnoremap <leader>ef :action GotoNextError<CR>
+
+" Navigate errors
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [e :action GotoPreviousError<CR>
+
+" Show error description
+nnoremap <leader>ed :action ShowErrorDescription<CR>
+
+" Quick fix
+nnoremap <leader>ca :action ShowIntentionActions<CR>
+
+
+
 " close current tab
 map <leader>q <action>(CloseContent)
 
