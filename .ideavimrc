@@ -199,3 +199,7 @@ nnoremap <leader>K :action QuickTypeDefinition<CR>
 
 " Parameter info
 nnoremap <C-p> :action ParameterInfo<CR>
+
+" Show clipboard history (like Win+V)
+nnoremap <leader>v :action PasteMultiple<CR>
+nnoremap <leader>p :action PasteMultiple<CR>
