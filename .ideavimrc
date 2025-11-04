@@ -1,25 +1,39 @@
+" ============================================================================
+"  IDEA VIM CONFIGURATION
+"  Purpose: Enhance productivity inside JetBrains Rider with Vim keybindings
+"  Author: Erfan Eslami
+" ============================================================================
 
-" ==========================================================
-set scrolloff=10
-set number relativenumber
-set showmode
-set showcmd
-set smartcase
-set incsearch
-set hlsearch
-set functiontextobj
-set visualbell
+
+" ============================================================================
+" 🧩 BASIC SETTINGS
+" ============================================================================
+
+set scrolloff=10                " Keep cursor 10 lines from top/bottom edge
+set number relativenumber       " Show line numbers (absolute + relative)
+set showmode                    " Display current mode
+set showcmd                     " Show incomplete command in statusline
+set smartcase                   " Smart case-insensitive searching
+set incsearch                   " Show search results while typing
+set hlsearch                    " Highlight search matches
+set functiontextobj             " Enable function text objects
+set visualbell                  " Visual bell instead of audible beep
+
 " Use system clipboard
-set clipboard+=unnamed   
+set clipboard+=unnamed
+
+" Enable multiple cursors
 set multiple-cursors
-" add leader key
+
+" Define leader key (spacebar)
 let mapleader = " "
 
 
-"" Plugin Settings
-"" ========================================================
+" ============================================================================
+" 🔌 PLUGIN SETTINGS
+" ============================================================================
 
-"" multiple cursor configuration
+" Multiple cursors
 nmap <C-n> <Plug>NextWholeOccurrence
 xmap <C-n> <Plug>NextWholeOccurrence
 nmap g<C-n> <Plug>NextOccurrence
@@ -27,86 +41,69 @@ xmap g<C-n> <Plug>NextOccurrence
 xmap <C-x> <Plug>SkipOccurrence
 xmap <C-p> <Plug>RemoveOccurrence
 
+" Surround, Yank highlighting, Sneak, NerdTree, and IdeaJoin support
 set surround
 set highlightedyank
 set sneak
 set nerdtree
 set ideajoin
 
-"" Key mappings
-"" ========================================================
 
-" inoremap jk <Esc>
+" ============================================================================
+" 🎹 CORE KEY MAPPINGS
+" ============================================================================
 
-" Tab navigation
+" ----- Basic movement and indentation -----
+vnoremap < <gv                 " Re-select after indent left
+vnoremap > >gv                 " Re-select after indent right
+nnoremap qj @q                 " Execute macro in 'q' register
+
+" ----- Tab navigation -----
 nnoremap <A-n> :tabnext<CR>
 nnoremap <A-p> :tabprev<CR>
 
-" Pane navigation
-" nnoremap <A-h> <C-w>h
-" nnoremap <A-l> <C-w>l
-" nnoremap <A-k> <C-w>k
-" nnoremap <A-j> <C-w>j
+" ----- Moving lines -----
+vmap <S-J> <Action>(MoveLineDown)
+vmap <S-K> <Action>(MoveLineUp)
 
-" Jump between methods
-" nnoremap [[ <Action>(MethodUp)
-" nnoremap ]] <Action>(MethodDown)
-
- Easy visual indentation
-vnoremap < <gv
-vnoremap > >gv
-
-" Execute macro saved in 'q' register
-nnoremap qj @q
-
-" Popup navigation
+" ----- Delete without copying to clipboard -----
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
+nnoremap c "_c
+nnoremap C "_C
+nnoremap s "_s
+nnoremap S "_S
+vnoremap p "_dP               " Prevent overwriting default register when pasting
 
 
+" ============================================================================
+" 🚀 LEADER COMMANDS
+" ============================================================================
 
-"" Leader commands
-"" ========================================================
-
-" Comment lines
+" ----- Comments -----
 map <leader>c <action>(CommentByLineComment)
 
-" Jump around with easymotion
+" ----- Navigation / Motion -----
 map <leader>j <Plug>(easymotion-s)
-
-" Open NERDTree (use q to exit)
 map <leader>x :NERDTreeToggle<CR>
 
-" Folding
+" ----- Code folding -----
 map <leader>zc :action CollapseAllRegions<CR>
 map <leader>zo :action ExpandAllRegions<CR>
 
-" Window splits
+" ----- Window splits -----
 map <leader>wv <Action>(SplitVertically)
 map <leader>ws <Action>(SplitHorizontally)
 map <leader>wu <Action>(Unsplit)
 map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
 
-" Display options
+" ----- Display options -----
 map <leader>dd <action>(ToggleDistractionFreeMode)
 map <leader>dz <action>(ToggleZenMode)
 map <leader>df <action>(ToggleFullScreen)
 
-" Actions
-map <leader>am <action>(ShowIntentionActions)
-map <leader>as <action>(SearchEverywhere)
-
-"find everything  
-map <leader>ff <action>(GotoFile)
-map <leader>fr <action>(RecentFiles)
-map <leader>fc <action>(GotoClass) 
-map <leader>fl <action>(RecentLocations)
-map <leader>fs <action>(NewScratchFile)
-map <leader>fa <Action>(SearchEverywhere)
-
-
-" Close active tab
-map <leader>q <action>(CloseContent)
-
-" Refactoring
+" ----- Refactoring -----
 map <leader>rn <Action>(RenameElement)
 map <leader>rm <Action>(ExtractMethod)
 map <leader>rv <Action>(IntroduceVariable)
@@ -114,92 +111,76 @@ map <leader>rf <Action>(IntroduceField)
 map <leader>rs <Action>(ChangeSignature)
 map <leader>rr <Action>(Refactorings.QuickListPopupAction)
 
-" Go to code
+" ----- Code navigation -----
 nmap <leader>gd <Action>(GotoDeclaration)
 nmap <leader>gy <Action>(GotoTypeDeclaration)
 nmap <leader>gi <Action>(GotoImplementation)
 nmap <leader>gu <Action>(ShowUsages)
 nmap <leader>gt <Action>(GotoTest)
-
 nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 
+" ----- Find & search -----
+map <leader>ff <action>(GotoFile)
+map <leader>fr <action>(RecentFiles)
+map <leader>fc <action>(GotoClass)
+map <leader>fl <action>(RecentLocations)
+map <leader>fs <action>(NewScratchFile)
+map <leader>fa <Action>(SearchEverywhere)
+nnoremap <leader>/ :action Find<CR>
 
-" Git windows
+" ----- Git commands -----
 map <leader>gc <Action>(CheckinProject)
 map <leader>gs <Action>(ActivateVersionControlToolWindow)
 map <leader>gb <Action>(Git.Branches)
 
-" Go to first error
-nnoremap <leader>ef :action GotoNextError<CR>
-
-" Navigate errors
+" ----- Error navigation -----
 nnoremap ]e :action GotoNextError<CR>
 nnoremap [e :action GotoPreviousError<CR>
-
-" Show error description
+nnoremap <leader>ef :action GotoNextError<CR>
 nnoremap <leader>ed :action ShowErrorDescription<CR>
-
-" Quick fix
 nnoremap <leader>ca :action ShowIntentionActions<CR>
 
-
-
-" close current tab
+" ----- Window & tab management -----
 map <leader>q <action>(CloseContent)
-
 map <leader>qa <action>(CloseAllEditors)
-
 nnoremap <leader>xf :NERDTreeFind<CR>
-nnoremap <leader>ct <Action>(ActiveateEditorComponent)
+nnoremap <leader>ct <Action>(ActivateEditorComponent)
 nnoremap <leader>rp "_ddP
-
-
-nnoremap d "_d
-nnoremap D "_D
-nnoremap x "_x
-vnoremap d "_d
-
-nnoremap c "_c
-nnoremap C "_C
-nnoremap s "_s
-nnoremap S "_S
-
-" Don't let visual mode paste overwrite default register
-vnoremap p "_dP
-
-" control + alt + A => create new item
-
-
-" move up and down
-vmap <S-J> <Action>(MoveLineDown)
-vmap <S-K> <Action>(MoveLineUp)
-
 nnoremap <leader>n :action NewElement<CR>
 
-
-" Resize sidebar (Project tool window)
-" Increase sidebar width
+" ----- Sidebar resizing -----
 nnoremap <leader>w+ :action ResizeToolWindowRight<CR>
-" Decrease sidebar width  
 nnoremap <leader>w- :action ResizeToolWindowLeft<CR>
-" Find Usages
+
+" ----- Usages & documentation -----
 nnoremap <leader>fu :action FindUsages<CR>
 nnoremap <leader>fs :action FindUsagesInFile<CR>
-
-" Show usages popup (quick preview)
 nnoremap <leader>su :action ShowUsages<CR>
-
-" Highlight usages in file
 nnoremap <leader>hu :action HighlightUsagesInFile<CR>
-" Quick documentation and usages
 nnoremap K :action QuickJavaDoc<CR>
 nnoremap <leader>k :action QuickImplementations<CR>
 nnoremap <leader>K :action QuickTypeDefinition<CR>
-
-" Parameter info
 nnoremap <C-p> :action ParameterInfo<CR>
 
-" Show clipboard history (like Win+V)
+" ----- Code formatting -----
+map <leader>f :action ReformatCode<CR>
+
+" ----- Clipboard -----
 nnoremap <leader>v :action PasteMultiple<CR>
 nnoremap <leader>p :action PasteMultiple<CR>
+
+
+" ============================================================================
+" 🔍 ENHANCED SEARCH EXPERIENCE
+" ============================================================================
+
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+
+" ============================================================================
+" ✅ END OF CONFIG
+" ============================================================================
