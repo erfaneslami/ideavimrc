@@ -74,7 +74,9 @@ nnoremap c "_c
 nnoremap C "_C
 nnoremap s "_s
 nnoremap S "_S
-vnoremap p "_dP               " Prevent overwriting default register when pasting
+vnoremap p "_dP              
+
+" Prevent overwriting default register when pasting
 
 
 " ============================================================================
